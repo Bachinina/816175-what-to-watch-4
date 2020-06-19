@@ -6,12 +6,15 @@ import Main from "../main/main.jsx";
 const App = (props) => {
   const {title, genre, year, movies} = props;
 
+  const onMovieTitleClick = () => {};
+
   return (
     <Main
       title={title}
       genre={genre}
       year={year}
       movies={movies}
+      onMovieTitleClick={onMovieTitleClick}
     />
   );
 };
