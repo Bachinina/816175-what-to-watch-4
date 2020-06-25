@@ -1,6 +1,6 @@
 import React from "react";
 import renderer from "react-test-renderer";
-import Main from "./main.jsx";
+import MoviesList from "./movies-list.jsx";
 
 const movies = [
   {
@@ -21,18 +21,9 @@ const movies = [
   }
 ];
 
-const movie = {
-  title: `The Grand Budapest Hotel`,
-  genre: `drama`,
-  year: 2014
-};
-
-it(`Should render Main`, () => {
+it(`Should render MoviesList`, () => {
   const tree = renderer.create(
-      <Main
-        title={movie.title}
-        genre={movie.genre}
-        year={movie.year}
+      <MoviesList
         movies={movies}
       />
   ).toJSON();
