@@ -7,7 +7,8 @@ class MovieCard extends PureComponent {
   }
 
   render() {
-    const {movie, onMovieCardMouseOver} = this.props;
+    const {movie, onMovieCardMouseOver, onMovieCardClick} = this.props;
+    const {name, previewImage} = movie;
 
     return (
       <article
@@ -16,11 +17,19 @@ class MovieCard extends PureComponent {
           onMovieCardMouseOver(movie);
         }}
       >
-        <div className="small-movie-card__image">
-          <img src={movie.src} alt={movie.title} width="280" height="175" />
+        <div className="small-movie-card__image"
+          onClick={() => {
+            onMovieCardClick(movie);
+          }}
+        >
+          <img src={previewImage} alt={name} width="280" height="175"/>
         </div>
-        <h3 className="small-movie-card__title">
-          <a className="small-movie-card__link" href="movie-page.html">{movie.title}</a>
+        <h3 className="small-movie-card__title"
+          onClick={() => {
+            onMovieCardClick(movie);
+          }}
+        >
+          <a className="small-movie-card__link">{name}</a>
         </h3>
       </article>
     );
@@ -29,10 +38,32 @@ class MovieCard extends PureComponent {
 
 MovieCard.propTypes = {
   movie: PropTypes.shape({
-    src: PropTypes.string.isRequired,
-    title: PropTypes.string.isRequired
+    id: PropTypes.oneOfType([
+      PropTypes.string,
+      PropTypes.number
+    ]).isRequired,
+    name: PropTypes.string.isRequired,
+    posterImage: PropTypes.string.isRequired,
+    previewImage: PropTypes.string.isRequired,
+    bgImage: PropTypes.string.isRequired,
+    bgColor: PropTypes.string.isRequired,
+    videoLink: PropTypes.string.isRequired,
+    previewVideoLink: PropTypes.string.isRequired,
+    description: PropTypes.string.isRequired,
+    rating: PropTypes.number.isRequired,
+    scoresCount: PropTypes.number.isRequired,
+    director: PropTypes.string.isRequired,
+    starring: PropTypes.arrayOf(
+        PropTypes.string
+    ).isRequired,
+    runTime: PropTypes.number.isRequired,
+    genre: PropTypes.string.isRequired,
+    released: PropTypes.number.isRequired,
+    isFavorite: PropTypes.bool.isRequired,
   }).isRequired,
-  onMovieCardMouseOver: PropTypes.func.isRequired
+  onMovieCardMouseOver: PropTypes.func.isRequired,
+  onMovieCardClick: PropTypes.func.isRequired,
 };
+
 
 export default MovieCard;

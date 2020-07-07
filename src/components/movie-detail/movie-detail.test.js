@@ -1,9 +1,9 @@
 import React from "react";
 import renderer from "react-test-renderer";
-import MoviesList from "./movies-list.jsx";
+import MovieDetail from "./movie-detail.jsx";
 
-const movies = [
-  {
+const props = {
+  movie: {
     id: 1,
     bgColor: `#ef05fe`,
     bgImage: `img/bohemian-rhapsody-bg.jpg`,
@@ -21,33 +21,14 @@ const movies = [
     scoresCount: 90,
     starring: [`Bill Murray`, `Edward Norton`, `Jude Law`, `Willem Dafoe`, `Saoirse Ronan`],
     videoLink: `https://some-link`
-  }, {
-    id: 2,
-    bgColor: `#f82136`,
-    bgImage: `img/macbeth-bg.jpg`,
-    description: `In the 1930s, the Grand Budapest Hotel is a popular European ski resort, presided over by concierge Gustave H. (Ralph Fiennes). Zero, a junior lobby boy, becomes Gustave's friend and protege.`,
-    director: `Wes Andreson`,
-    genre: `Comedy`,
-    isFavorite: false,
-    name: `Macbeth`,
-    posterImage: `img/macbeth-poster.jpg`,
-    previewImage: `img/macbeth.jpg`,
-    previewVideoLink: `https://some-link`,
-    rating: 2.2,
-    released: 2003,
-    runTime: 30,
-    scoresCount: 347,
-    starring: [`Bill Murray`, `Edward Norton`],
-    videoLink: `https://some-link`,
   }
-];
+};
 
-
-it(`Should render MoviesList`, () => {
+it(`Should render Movie detail`, () => {
+  const {movie} = props;
   const tree = renderer.create(
-      <MoviesList
-        movies={movies}
-        onMovieCardClick={() => {}}
+      <MovieDetail
+        movie={movie}
       />
   ).toJSON();
 

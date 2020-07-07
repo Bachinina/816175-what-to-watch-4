@@ -8,13 +8,14 @@ class Main extends PureComponent {
   }
 
   render() {
-    const {title, genre, year, movies} = this.props;
+    const {promoMovie, movies, onMovieCardClick} = this.props;
+    const {name, genre, released} = promoMovie;
 
     return (
       <React.Fragment>
         <section className="movie-card">
           <div className="movie-card__bg">
-            <img src="img/bg-the-grand-budapest-hotel.jpg" alt={title} />
+            <img src="img/bg-the-grand-budapest-hotel.jpg" alt={name} />
           </div>
 
           <h1 className="visually-hidden">WTW</h1>
@@ -38,14 +39,14 @@ class Main extends PureComponent {
           <div className="movie-card__wrap">
             <div className="movie-card__info">
               <div className="movie-card__poster">
-                <img src="img/the-grand-budapest-hotel-poster.jpg" alt={title + ` poster`} width="218" height="327" />
+                <img src="img/the-grand-budapest-hotel-poster.jpg" alt={name + ` poster`} width="218" height="327" />
               </div>
 
               <div className="movie-card__desc">
-                <h2 className="movie-card__title">{title}</h2>
+                <h2 className="movie-card__title">{name}</h2>
                 <p className="movie-card__meta">
                   <span className="movie-card__genre">{genre}</span>
-                  <span className="movie-card__year">{year}</span>
+                  <span className="movie-card__year">{released}</span>
                 </p>
 
                 <div className="movie-card__buttons">
@@ -106,6 +107,7 @@ class Main extends PureComponent {
 
             <MoviesList
               movies={movies}
+              onMovieCardClick={onMovieCardClick}
             />
 
           </section>
@@ -131,15 +133,15 @@ class Main extends PureComponent {
 
 
 Main.propTypes = {
-  title: PropTypes.string.isRequired,
-  genre: PropTypes.string.isRequired,
-  year: PropTypes.number.isRequired,
+  promoMovie: PropTypes.shape({
+    name: PropTypes.string.isRequired,
+    genre: PropTypes.string.isRequired,
+    released: PropTypes.number.isRequired,
+  }).isRequired,
   movies: PropTypes.arrayOf(
-      PropTypes.shape({
-        src: PropTypes.string.isRequired,
-        title: PropTypes.string.isRequired
-      })
-  ).isRequired
+      PropTypes.object
+  ).isRequired,
+  onMovieCardClick: PropTypes.func.isRequired
 };
 
 export default Main;

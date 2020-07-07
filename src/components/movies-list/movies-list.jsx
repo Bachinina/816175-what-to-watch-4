@@ -2,6 +2,7 @@ import React, {PureComponent} from "react";
 import PropTypes from "prop-types";
 import MovieCard from "../movie-card/movie-card.jsx";
 
+
 class MoviesList extends PureComponent {
   constructor(props) {
     super(props);
@@ -13,15 +14,16 @@ class MoviesList extends PureComponent {
   }
 
   render() {
-    const {movies} = this.props;
+    const {movies, onMovieCardClick} = this.props;
     return (
       <React.Fragment>
         <div className="catalog__movies-list">
           {movies.map((movie) => (
             <MovieCard
-              key={movie.title}
+              key={movie.id}
               movie={movie}
               onMovieCardMouseOver={this._handleMovieCardMouseOver}
+              onMovieCardClick={onMovieCardClick}
             />
           ))}
         </div>
@@ -45,10 +47,31 @@ class MoviesList extends PureComponent {
 MoviesList.propTypes = {
   movies: PropTypes.arrayOf(
       PropTypes.shape({
-        src: PropTypes.string.isRequired,
-        title: PropTypes.string.isRequired
+        id: PropTypes.oneOfType([
+          PropTypes.string,
+          PropTypes.number
+        ]).isRequired,
+        name: PropTypes.string.isRequired,
+        posterImage: PropTypes.string.isRequired,
+        previewImage: PropTypes.string.isRequired,
+        bgImage: PropTypes.string.isRequired,
+        bgColor: PropTypes.string.isRequired,
+        videoLink: PropTypes.string.isRequired,
+        previewVideoLink: PropTypes.string.isRequired,
+        description: PropTypes.string.isRequired,
+        rating: PropTypes.number.isRequired,
+        scoresCount: PropTypes.number.isRequired,
+        director: PropTypes.string.isRequired,
+        starring: PropTypes.arrayOf(
+            PropTypes.string
+        ).isRequired,
+        runTime: PropTypes.number.isRequired,
+        genre: PropTypes.string.isRequired,
+        released: PropTypes.number.isRequired,
+        isFavorite: PropTypes.bool.isRequired,
       })
-  ).isRequired
+  ).isRequired,
+  onMovieCardClick: PropTypes.func.isRequired
 };
 
 export default MoviesList;
